@@ -1,0 +1,7 @@
+{
+  "name": "Lost",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
