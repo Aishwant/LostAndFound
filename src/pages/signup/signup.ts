@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { FeedPage } from '../feed/feed';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SignupPage page.
@@ -16,15 +18,31 @@ import { HomePage } from '../home/home';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  fname: string;
+  lname: string;
+  username: string;
+  password: string;
+  email:string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   redirectTo_login(){
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push(HomePage).then(()=> {
+      this.navCtrl.pop;
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+  redirectTo_feed(){
+    if(!this.fname || !this.lname || !this.email || !this.username || !this.password){
+      const alert = this.alertCtrl.create({
+        subTitle: "Please fill all the fields",
+        buttons: ['OK']
+      });
+      alert.present();
+    }else{
+      this.navCtrl.setRoot(FeedPage);
+    }
   }
 
 }
