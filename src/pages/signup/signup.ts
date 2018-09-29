@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
-
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,9 +21,7 @@ export class SignupPage {
   }
 
   redirectTo_login(){
-    this.navCtrl.push(HomePage).then(()=> {
-      this.navCtrl.pop;
-    });
+    this.navCtrl.push(LoginPage);
   }
 
   redirectTo_feed(){
