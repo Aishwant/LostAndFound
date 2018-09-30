@@ -13,23 +13,41 @@ export class SignupPage {
 
   fname: string;
   lname: string;
-  username: string;
+  email: string;
   password: string;
-  email:string;
+  re_password:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   redirectTo_feed(){
-    if(!this.fname || !this.lname || !this.email || !this.username || !this.password){
+
+    //validity check
+    if(/^[a-zA-Z0-9_@.]+$/.test(this.email) && this.fname && this.lname && this.password && this.re_password){
+
+      if(this.password === this.re_password){
+
+        this.navCtrl.setRoot(FeedPage);
+
+      }else{
+
+        const alert = this.alertCtrl.create({
+          subTitle: "Passwords don't match",
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+
+    }else{
+
       const alert = this.alertCtrl.create({
-        subTitle: "Please fill all the fields",
+        title: "Invalid",
+        subTitle: "Please fill all the fields correctly",
         buttons: ['OK']
       });
       alert.present();
-    }else{
-      this.navCtrl.setRoot(FeedPage);
     }
+
   }
 
 }
