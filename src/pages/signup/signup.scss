@@ -1,17 +1,11 @@
 page-signup {
-    .SignUpPage{
+
+    .back{
         background-color: #4292cd;
     }
-    ion-grid{
-        padding-top: 200px;
-    }
-    // @media screen and (min-width : 600px){
-    //     .starter-img{
-    //         display: none;
-    //     }
-    // }
+
     .credentials{
-        margin-top: 150px;
+        margin-top: 50px;
     }
 
     .login-signup{
@@ -19,7 +13,7 @@ page-signup {
     }
 
     .cred-tabs{
-        background-color: #56A0DD;
+        //background-color: #56A0DD;
         border-bottom: 1px solid #fff;
         padding: 10px;
         text-align: center;
@@ -27,21 +21,21 @@ page-signup {
         font-size: 1.6rem;
     }
 
-    .cred-tabs:hover{
-        background-color: #27a3fb;
-        color: #fff;
-    }
-
     .border-right{
         border-right: 1px solid #ccc;
     }
 
     .active{
-        background-color: #27a3fb;
+        background-color: #56A0DD;
         color: #fff;
     }
 
+    .input-field{
+        border-bottom: 1px solid #ccc;
+    }
+
     .btn-design{
-        height: 30px!important;
+        height: 40px!important;
+        background-color: #27a3fb;
     }
 }

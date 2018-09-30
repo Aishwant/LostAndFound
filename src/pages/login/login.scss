@@ -1,18 +1,13 @@
 page-login {
 
-    .homepage{
-        background-color: #4292cd;
-    }
-    ion-grid{
-        padding-top: 200px;
-    }
     // @media screen and (min-width : 600px){
     //     .starter-img{
     //         display: none;
     //     }
     // }
-    .credentials{
-        margin-top: 200px;
+
+    .logo{
+        margin: 30px auto;
     }
 
     .login-signup{
@@ -42,10 +37,12 @@ page-login {
         color: #fff;
     }
 
-    .btn-design{
-        height: 30px!important;
+    .input-field{
+        border-bottom: 1px solid #ccc;
     }
 
+    .btn-design{
+        height: 40px!important;
+    }
 
-    
 }

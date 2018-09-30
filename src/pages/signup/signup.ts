@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
 
@@ -18,10 +18,6 @@ export class SignupPage {
   email:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-  }
-
-  redirectTo_login(){
-    this.navCtrl.push(LoginPage);
   }
 
   redirectTo_feed(){

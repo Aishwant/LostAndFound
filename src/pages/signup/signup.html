@@ -1,4 +1,11 @@
-<ion-content class='SignUpPage'>
+<ion-header>
+
+  <ion-navbar class="back">
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
 
   <ion-grid>
     <ion-row class="credentials">
@@ -6,30 +13,22 @@
       </ion-col>
       <ion-col padding col-sm-12 col-md-4 class="login-signup">
         <ion-row>
-          <ion-col class="cred-tabs border-right" (click)="redirectTo_login()">Login</ion-col>
+          <ion-col col-auto></ion-col>
+          <!-- <ion-col class="cred-tabs border-right">Login</ion-col> -->
           <ion-col class="cred-tabs active">SignUp</ion-col>
+          <ion-col col-auto></ion-col>
         </ion-row>
-        <ion-item padding-right>  <!-- parent ion-tem -->
 
-            <ion-item>
-              <ion-input type="text" placeholder="First Name" [(ngModel)]="fname"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="text" placeholder="Last Name" [(ngModel)]="lname"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
-            </ion-item>
-            <br><br>
-            <button ion-button full (click)="redirectTo_feed()" class="btn-design">Login</button>
+              <ion-input class="input-field" type="text" placeholder="First Name" [(ngModel)]="fname"></ion-input>
+              <ion-input class="input-field" type="text" placeholder="Last Name" [(ngModel)]="lname"></ion-input>
+              <ion-input class="input-field" type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+              <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
 
-        </ion-item> <!-- parent ion-tem closed -->
+              <br><br>
+
+              <button ion-button full (click)="redirectTo_feed()" class="btn-design">Sign Up</button>
+
       </ion-col>
       <ion-col col-auto col-md-4>
       </ion-col>

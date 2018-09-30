@@ -1,27 +1,32 @@
-<ion-content class='homepage'>
+<ion-content padding>
 
   <ion-grid>
+    <ion-row>
+      <img class="logo" width="150" height="150" src="../../assets/imgs/logo.png">
+    </ion-row>
     <ion-row class="credentials">
+
       <ion-col col-auto col-md-4>
       </ion-col>
+
       <ion-col padding col-sm-12 col-md-4 class="login-signup">
         <ion-row>
           <ion-col class="cred-tabs border-right active">Login</ion-col>
           <ion-col class="cred-tabs" (click)="redirectTo_SignUp()">SignUp</ion-col>
         </ion-row>
-        <ion-item padding-right>  <!-- parent ion-tem -->
-            <ion-item>
-              <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
-            </ion-item>
-            <br><br>
-            <button ion-button full (click)="redirectTo_feed()" class="btn-design">Login</button>
-        </ion-item> <!-- parent ion-tem closed -->
+
+              <ion-input class="input-field" type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+              <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+
+              <br><br>
+
+              <button ion-button full (click)="redirectTo_feed()" class="btn-design">Login</button>
+
       </ion-col>
+
       <ion-col col-auto col-md-4>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>
