@@ -12,6 +12,7 @@
       <ion-col col-auto col-md-4>
       </ion-col>
       <ion-col padding col-sm-12 col-md-4 class="login-signup">
+
         <ion-row>
           <ion-col col-auto></ion-col>
           <!-- <ion-col class="cred-tabs border-right">Login</ion-col> -->
@@ -19,15 +20,18 @@
           <ion-col col-auto></ion-col>
         </ion-row>
 
-              <ion-input class="input-field" type="text" placeholder="First Name" [(ngModel)]="fname"></ion-input>
-              <ion-input class="input-field" type="text" placeholder="Last Name" [(ngModel)]="lname"></ion-input>
-              <ion-input class="input-field" type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
-              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
-              <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+        <div no-lines padding>
+            <ion-input class="input-field" type="text" placeholder="First Name" [(ngModel)]="fname"></ion-input>
+            <ion-input class="input-field" type="text" placeholder="Last Name" [(ngModel)]="lname"></ion-input>
+            <ion-input class="input-field" type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+            <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+            <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
 
-              <br><br>
+          <br><br>
 
-              <button ion-button full (click)="redirectTo_feed()" class="btn-design">Sign Up</button>
+          <button ion-button full (click)="redirectTo_feed()" class="btn-design">Sign Up</button>
+
+        </div>
 
       </ion-col>
       <ion-col col-auto col-md-4>
