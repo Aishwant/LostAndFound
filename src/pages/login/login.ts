@@ -24,14 +24,15 @@ export class LoginPage {
 
   redirectTo_feed(){
 
-    if(!this.email || !this.password){
+    if(/^[a-zA-Z0-9_@.]+$/.test(this.email) && this.password){ //validity check
+      this.navCtrl.setRoot(FeedPage);
+    }else{
       const alert = this.alertCtrl.create({
-        subTitle: "Please fill all the fields",
+        title: "Invalid",
+        subTitle: "Please fill all the fields correctly",
         buttons: ['OK']
       });
       alert.present();
-    }else{
-      this.navCtrl.setRoot(FeedPage);
     }
 
   }
