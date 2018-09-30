@@ -11,7 +11,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class LoginPage {
 
-  username: string;
+  email: string;
   password: string;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
@@ -24,7 +24,7 @@ export class LoginPage {
 
   redirectTo_feed(){
 
-    if(!this.username || !this.password){
+    if(!this.email || !this.password){
       const alert = this.alertCtrl.create({
         subTitle: "Please fill all the fields",
         buttons: ['OK']
@@ -32,9 +32,12 @@ export class LoginPage {
       alert.present();
     }else{
       this.navCtrl.setRoot(FeedPage);
-      // this.navCtrl.push(FeedPage);
     }
 
   }
 
+  redirectTo_forgotpwd(){
+    console.log('Clicked');
+    // this.navCtrl.push('');
+  }
 }
