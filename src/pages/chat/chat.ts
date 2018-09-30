@@ -15,11 +15,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
+  user:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user = navParams.get('userN');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPage');
+  }
+
+  checkNewMsg(){
+    return true;
+  }
+
+  NewMsg(){
+    return 'Hello';
   }
 
 }

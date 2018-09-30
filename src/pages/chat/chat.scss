@@ -1,3 +1,21 @@
 page-chat {
+    .chat_input{
+        border: 1px #ccc solid;
+    }
 
+    .chat-left{
+        background-color: #4292cd;
+        color: #fff;
+        font-size:1.6rem;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .chat-right{
+        background-color: #4292cd;
+        color: #fff;
+        font-size:1.6rem;
+        padding: 10px;
+        border-radius: 10px;
+    }
 }
