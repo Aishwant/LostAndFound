@@ -18,4 +18,22 @@ page-chat {
         padding: 10px;
         border-radius: 10px;
     }
+
+    @media screen and (max-width: 600px){
+        .chat-left{
+            background-color: #4292cd;
+            color: #fff;
+            font-size:1.1rem;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .chat-right{
+            background-color: #4292cd;
+            color: #fff;
+            font-size:1.1rem;
+            padding: 5px;
+            border-radius: 10px;
+        }
+    }
 }
