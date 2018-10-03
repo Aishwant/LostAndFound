@@ -9,5 +9,24 @@
 
 
 <ion-content padding>
+  <h2 text-center>{{ item }}</h2>
 
+    <ion-segment [(ngModel)]="item" color="dark">
+      <ion-segment-button value="Found Items">
+        <ion-icon name="hand"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="Lost Items">
+        <ion-icon name="help"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list style="margin:0" inset>
+      <button ion-item *ngFor="let i of itemName(item)">
+        <ion-card padding>
+          Item: {{ i.itemName }} <br>
+          Location: {{ i.itemLocation }} <br>
+          Description: {{ i.itemDescription }}
+        </ion-card>
+      </button>
+    </ion-list>
 </ion-content>
