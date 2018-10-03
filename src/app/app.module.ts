@@ -30,6 +30,10 @@ import { LostPageModule } from '../pages/lost/lost.module';
 import { ChatPageModule } from '../pages/chat/chat.module';
 import { ListchatPageModule } from '../pages/listchat/listchat.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
+import { SearchPageModule } from '../pages/search/search.module';
+import { SearchPage } from '../pages/search/search';
+import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { ItemDetailsPageModule } from '../pages/item-details/item-details.module';
 
 
 
@@ -56,7 +60,9 @@ import { SettingsPageModule } from '../pages/settings/settings.module';
     LostPageModule,
     ChatPageModule,
     ListchatPageModule,
-    SettingsPageModule
+    SettingsPageModule,
+    SearchPageModule,
+    ItemDetailsPageModule
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
@@ -70,7 +76,9 @@ import { SettingsPageModule } from '../pages/settings/settings.module';
     AboutAppPage,
     ChatPage,
     ListchatPage,
-    SettingsPage
+    SettingsPage,
+    SearchPage,
+    ItemDetailsPage
   ],
   providers: [
     StatusBar,
