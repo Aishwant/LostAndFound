@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChatPage } from '../chat/chat';
 
-/**
- * Generated class for the ListchatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-listchat',
@@ -24,7 +17,7 @@ export class ListchatPage {
       },
       {
         name: 'Aero',
-        avatar: "assets/imgs/me.jpg",
+        avatar: "assets/imgs/aero.jpg",
         content: "Hello. You're awesome. Thank you for finding my belongings :)"
       }
   ];
