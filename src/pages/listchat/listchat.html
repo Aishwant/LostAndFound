@@ -11,14 +11,15 @@
 
 <ion-content padding>
 
-    <ion-list>
-      <button ion-item (click)="gotoUserC()">
+    <ion-list *ngFor="let user of getlistChat()">
+      <button ion-item (click)="gotoUserC(user.name)">
 
           <ion-avatar item-start>
-            <img src="../../assets/imgs/me.jpg">
+            <img [src]="user.avatar">
           </ion-avatar>
-          <h2>Cher</h2>
-          <p>Ugh. As if.</p>
+
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.content }}</p>
 
       </button>
     </ion-list>

@@ -16,16 +16,29 @@ import { ChatPage } from '../chat/chat';
 })
 export class ListchatPage {
 
-  userN:string = 'Aish';
+  listUserChat: any = [
+      {
+        name: 'Aish',
+        avatar: "assets/imgs/me.jpg",
+        content: "Hello. You're welcome. Hope you won't lose it again :P"
+      },
+      {
+        name: 'Aero',
+        avatar: "assets/imgs/me.jpg",
+        content: "Hello. You're awesome. Thank you for finding my belongings :)"
+      }
+  ];
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListchatPage');
+  gotoUserC(name:string){
+    this.navCtrl.push(ChatPage, {userN: name});
   }
 
-  gotoUserC(){
-    this.navCtrl.push(ChatPage, {userN: this.userN});
+  getlistChat(){
+    return this.listUserChat;
   }
 
 }
