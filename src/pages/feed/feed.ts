@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-
-/**
- * Generated class for the FeedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ItemDetailsPage } from '../item-details/item-details';
 
 @IonicPage()
 @Component({
@@ -52,4 +46,9 @@ export class FeedPage {
   itemLocation(){
     return this.items.itemLocation;
   }
+
+  getDetails(itemN: any){
+    this.navCtrl.push(ItemDetailsPage,{item: itemN});
+  }
+
 }
