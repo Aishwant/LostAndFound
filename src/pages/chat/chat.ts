@@ -29,8 +29,12 @@ export class ChatPage {
     return true;
   }
 
-  NewMsg(){
-    return 'Hello';
+  NewMsgServer(){
+    return 'Hello. Thank you for helping me find my lost item :) Have a good day';
+  }
+
+  NewMsgClient(){
+    return "You're welcome. Hope you want lose it again :P have a good day";
   }
 
 }

@@ -6,31 +6,53 @@ page-chat {
     .chat-left{
         background-color: #4292cd;
         color: #fff;
-        font-size:1.6rem;
-        padding: 10px;
-        border-radius: 10px;
     }
 
     .chat-right{
-        background-color: #4292cd;
-        color: #fff;
-        font-size:1.6rem;
-        padding: 10px;
-        border-radius: 10px;
+            background-color: #ccc;
+            color: #000;
+        }
+
+    @media screen and (min-width: 1024px){
+        .chat-left{
+            font-size:1.6rem;
+            padding: 10px;
+            border-radius: 10px;
+            margin-right: 150px;
+        }
+
+        .chat-right{
+            font-size:1.6rem;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left: 200px;
+        }
     }
+
+
+    @media screen and (min-width: 600px) and (max-width: 1051px){
+        .chat-left{
+            font-size:1.6rem;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .chat-right{
+            font-size:1.6rem;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    }
+
 
     @media screen and (max-width: 600px){
         .chat-left{
-            background-color: #4292cd;
-            color: #fff;
             font-size:1.1rem;
             padding: 5px;
             border-radius: 10px;
         }
 
         .chat-right{
-            background-color: #4292cd;
-            color: #fff;
             font-size:1.1rem;
             padding: 5px;
             border-radius: 10px;
