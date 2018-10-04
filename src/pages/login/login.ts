@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
+import { User } from '../../models/user';
 
 @IonicPage()
 @Component({
@@ -11,10 +12,14 @@ import { AlertController } from 'ionic-angular';
 })
 export class LoginPage {
 
+  user = {} as User;
   email: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public menu: MenuController) {
+    this.menu.swipeEnable(false);
+  }
+  login(){
 
   }
 
