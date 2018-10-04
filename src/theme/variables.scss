@@ -16,6 +16,13 @@ $app-direction: ltr;
 
 
 // Shared Variables
+@import url('https://fonts.googleapis.com/css?family=K2D');
+
+$font-family-base: 'K2D', sans-serif;
+$font-family-ios-base: 'K2D', sans-serif;
+$font-family-md-base: 'K2D', sans-serif;
+$font-family-wp-base: 'K2D', sans-serif;
+
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
@@ -39,7 +46,7 @@ $colors: (
   dark:       #222
 );
 
-
+$toolbar-background: #2193FF;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
