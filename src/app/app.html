@@ -5,17 +5,20 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <button ion-item detail-none>
+        <button ion-item detail-none style="background-color:#eee">
             <ion-avatar>
                 <img src="assets/imgs/me.jpg" class="avatar_menu">
             </ion-avatar>
         </button>
-        <ion-list>
-            <button menuClose ion-item detail-none *ngFor = "let p of pages" (click)="openPage(p)">
-                <ion-icon [name]="p.icon"> &nbsp; &nbsp; {{ p.title }}</ion-icon>
+        <ion-list no-border detail-none>
+            <button menuClose ion-item detail-none *ngFor = "let p of pages" (click)="openPage(p)" [color]="isActive(p)">
+                <ion-icon [name]="p.icon"> &nbsp; &nbsp; </ion-icon>{{ p.title }}
             </button>
         </ion-list>
     </ion-content>
+    <ion-footer text-center>
+        <h6 style="font-size: 0.8em">@copyright: Aishwant Ghimire</h6>
+    </ion-footer>
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
