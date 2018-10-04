@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
@@ -17,7 +17,8 @@ export class SignupPage {
   password: string;
   re_password:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public menu: MenuController) {
+    this.menu.swipeEnable(false);
   }
 
   redirectTo_feed(){
