@@ -4,6 +4,7 @@ import { SignupPage } from '../signup/signup';
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
+import { ServicesAuth } from '../../providers/services-auth/services-auth';
 
 @IonicPage()
 @Component({
@@ -16,21 +17,24 @@ export class LoginPage {
   email: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public menu: MenuController, private sAuth: ServicesAuth) {
     this.menu.swipeEnable(false);
   }
+
   login(){
-
-  }
-
-  redirectTo_SignUp(){
-    this.navCtrl.push(SignupPage);
-  }
-
-  redirectTo_feed(){
-
     if(/^[a-zA-Z0-9_@.]+$/.test(this.email) && this.password){ //validity check
-      this.navCtrl.setRoot(FeedPage);
+      this.sAuth.loginVerificationEmail(this.email,this.password)
+      .then(
+        () => this.navCtrl.setRoot(FeedPage),
+        error =>{
+          const alert = this.alertCtrl.create({
+          title: "Invalid",
+          subTitle: error.message,
+          buttons: ['OK']
+        });
+        alert.present();
+        }
+        );
     }else{
       const alert = this.alertCtrl.create({
         title: "Invalid",
