@@ -32,4 +32,8 @@ export class ServicesAuth{
   signupWithEmail(email,password){
       return this.afAuth.auth.createUserWithEmailAndPassword(email,password);
   }
+
+  loginVerificationEmail(email,password){
+    return this.afAuth.auth.signInWithEmailAndPassword(email,password);
+  }
 }
