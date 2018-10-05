@@ -39,14 +39,20 @@ $font-family-wp-base: 'K2D', sans-serif;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:          #2193FF,
+  secondary:        #00AC71,
+  danger:           #f53d3d,
+  light:            #f4f4f4,
+  dark:             #222,
+  primary1:         #0096ED,
+  primary-toolbar:  #02A8C9,
+  primaryBlack:     #2B2B2B,
+  primaryRed:       #ED1C2D,
+  primaryGreen:     #00AC71,
+  primaryWhite:     #F6F6F6,
 );
 
-$toolbar-background: #2193FF;
+$toolbar-background: #02A8C9;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
