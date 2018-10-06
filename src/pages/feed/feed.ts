@@ -50,5 +50,8 @@ export class FeedPage {
   getDetails(itemN: any){
     this.navCtrl.push(ItemDetailsPage,{item: itemN});
   }
-
+  getColor(item){
+    if(item == "Found Items") return "primaryGreen";
+    else return "primaryRed";
+  }
 }
