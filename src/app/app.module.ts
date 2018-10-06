@@ -62,7 +62,7 @@ import { ItemDetailsPageModule } from '../pages/item-details/item-details.module
     ListchatPageModule,
     SettingsPageModule,
     SearchPageModule,
-    ItemDetailsPageModule
+    ItemDetailsPageModule,
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],

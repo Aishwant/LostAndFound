@@ -37,6 +37,7 @@ export class MyApp {
       { title: 'Chat', component: ListchatPage, icon:'chatbubbles' },
       { title: 'Settings', component: SettingsPage, icon:'settings' },
       { title: 'About', component: AboutAppPage, icon:'information-circle' },
+      { title: 'LogOut', component: LoginPage, icon:'exit' },
     ];
 
   }
