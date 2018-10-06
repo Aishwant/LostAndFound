@@ -45,6 +45,9 @@ export class LoginPage {
     }
 
   }
+  redirectTo_SignUp(){
+    this.navCtrl.push(SignupPage);
+  }
 
   redirectTo_forgotpwd(){
     console.log('Clicked');
