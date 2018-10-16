@@ -5,6 +5,7 @@ import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { ServicesAuth } from '../../providers/services-auth/services-auth';
+import { ForgotpwdPage } from '../forgotpwd/forgotpwd';
 
 @IonicPage()
 @Component({
@@ -29,7 +30,7 @@ export class LoginPage {
         error =>{
           const alert = this.alertCtrl.create({
           title: "Invalid",
-          subTitle: error.message,
+          subTitle: "The Email or Password is incorrect",
           buttons: ['OK']
         });
         alert.present();
@@ -50,7 +51,6 @@ export class LoginPage {
   }
 
   redirectTo_forgotpwd(){
-    console.log('Clicked');
-    // this.navCtrl.push('');
+    this.navCtrl.push(ForgotpwdPage);
   }
 }
