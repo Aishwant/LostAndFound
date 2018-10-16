@@ -36,4 +36,8 @@ export class ServicesAuth{
   loginVerificationEmail(email,password){
     return this.afAuth.auth.signInWithEmailAndPassword(email,password);
   }
+
+  resetPasswordEmail(email){
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
 }
