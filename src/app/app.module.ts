@@ -34,6 +34,8 @@ import { SearchPageModule } from '../pages/search/search.module';
 import { SearchPage } from '../pages/search/search';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ItemDetailsPageModule } from '../pages/item-details/item-details.module';
+import { ForgotpwdPage } from '../pages/forgotpwd/forgotpwd';
+import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
 
 
 
@@ -63,6 +65,7 @@ import { ItemDetailsPageModule } from '../pages/item-details/item-details.module
     SettingsPageModule,
     SearchPageModule,
     ItemDetailsPageModule,
+    ForgotpwdPageModule
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
@@ -78,7 +81,8 @@ import { ItemDetailsPageModule } from '../pages/item-details/item-details.module
     ListchatPage,
     SettingsPage,
     SearchPage,
-    ItemDetailsPage
+    ItemDetailsPage,
+    ForgotpwdPage
   ],
   providers: [
     StatusBar,
