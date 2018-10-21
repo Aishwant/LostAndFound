@@ -23,11 +23,11 @@
 
       <ion-col padding col-sm-12 col-md-4 class="login-signup">
 
-              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="user.email" style="border-bottom: 1px #eee solid;"></ion-input>
 
               <br><br>
 
-              <button ion-button full (click)="resetpwd()" class="btn-design">Reset Password</button>
+              <button ion-button full (click)="resetpwd(user)" class="btn-design">Reset Password</button>
 
       </ion-col>
 

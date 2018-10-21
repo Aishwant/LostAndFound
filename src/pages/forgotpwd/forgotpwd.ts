@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { ServicesAuth } from '../../providers/services-auth/services-auth';
+import { User } from '../../models/user_interface';
 
 /**
  * Generated class for the ForgotpwdPage page.
@@ -16,6 +17,7 @@ import { ServicesAuth } from '../../providers/services-auth/services-auth';
 })
 export class ForgotpwdPage {
 
+  user= {} as User;
   email:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sAuth: ServicesAuth, public menu: MenuController,public alertCtrl: AlertController) {
     this.menu.swipeEnable(false);
@@ -25,9 +27,9 @@ export class ForgotpwdPage {
     console.log('ionViewDidLoad ForgotpwdPage');
   }
 
-  resetpwd(){
-    if(/^[a-zA-Z0-9_@.]+$/.test(this.email)&& this.email){
-      this.sAuth.resetPasswordEmail(this.email)
+  resetpwd(user: User){
+    if(/^[a-zA-Z0-9_@.]+$/.test(user.email)&& user.email){
+      this.sAuth.resetPasswordEmail(user)
       .then(
         () => {
           const alert = this.alertCtrl.create({
