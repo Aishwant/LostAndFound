@@ -41,7 +41,7 @@ import { FirstIntroPage } from '../pages/first-intro/first-intro';
 import { FirstIntroPageModule } from '../pages/first-intro/first-intro.module';
 
 import { UserService } from '../providers/user-service/user-service';
-import { AddItemService} from '../providers/add-item-service/addItem-service';
+import { ItemService} from '../providers/item-service/Item-service';
 
 
 // let config: SocketIoConfig = {
@@ -97,7 +97,7 @@ import { AddItemService} from '../providers/add-item-service/addItem-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicesAuth,
     UserService,
-    AddItemService,
+    ItemService,
   ]
 })
 export class AppModule {}

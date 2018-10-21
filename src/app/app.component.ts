@@ -11,6 +11,7 @@ import { AboutAppPage } from '../pages/about-app/about-app';
 import { ListchatPage } from '../pages/listchat/listchat';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
+import { AngularFireObject } from 'angularfire2/database';
 @Component({
   templateUrl: 'app.html'
 })
@@ -39,15 +40,10 @@ export class MyApp {
       { title: 'About', component: AboutAppPage, icon:'information-circle' },
       { title: 'LogOut', component: LoginPage, icon:'exit' },
     ];
-
   }
 
   openPage(page) {
     this.nav.setRoot(page.component);
-  }
-
-  isActive(page: any){
-    //return "#56A0DD" || this.rootPage.name == page.component.name;
   }
 
 }
