@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
-import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
-import { ServicesAuth } from '../../providers/services-auth/services-auth'
-import { User } from '../../models/user';
+import { ServicesAuth } from '../../providers/services-auth/services-auth';
+import { UserService } from '../../providers/user-service/user-service';
+
+import { User } from '../../models/user_interface';
+import { FirstIntroPage } from '../first-intro/first-intro';
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -13,26 +15,23 @@ import { User } from '../../models/user';
 export class SignupPage {
 
   user = {} as User;
-  fname: string;
-  lname: string;
-  email: string;
-  password: string;
-  re_password:string;
+  re_password: string;
 
-  constructor(public navParams: NavParams, public alertCtrl: AlertController, public menu: MenuController, private sAuth:ServicesAuth, private navCtrl: NavController) {
+  constructor(public navParams: NavParams, public alertCtrl: AlertController, public menu: MenuController, private sAuth:ServicesAuth, private navCtrl: NavController,private uDB: UserService) {
     this.menu.swipeEnable(false);
   }
 
-  register(){
+  register(user: User){
+    // validity check
+    if(/^[a-zA-Z0-9_@.]+$/.test(user.email) && user.password && this.re_password){
 
-    //validity check
-    if(/^[a-zA-Z0-9_@.]+$/.test(this.email) && this.fname && this.lname && this.password && this.re_password){
+      if(user.password === this.re_password){
 
-      if(this.password === this.re_password){
-
-        this.sAuth.signupWithEmail(this.email,this.password)
+        this.sAuth.signupWithEmail(user)
           .then(
-            () => this.navCtrl.setRoot(FeedPage),
+            () =>{
+              this.navCtrl.setRoot(FirstIntroPage);
+            },
             error => {
               const alert = this.alertCtrl.create({
                 subTitle: error.message,
