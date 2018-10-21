@@ -1,0 +1,34 @@
+<ion-slides (ionSlideDidChange)="slideChanged()">
+  <ion-slide>
+    <h1>Welcome Aboard</h1>
+    <h5>Let's get to know you</h5>
+    <h6>slide from right to left</h6>
+    <-----
+  </ion-slide>
+  <ion-slide padding>
+    <ion-input class="input-field" type="text" placeholder="First Name" [(ngModel)]="userContent.fname" style="border-bottom: 1px #eee solid;"></ion-input>
+    <ion-input class="input-field" type="text" placeholder="Last Name" [(ngModel)]="userContent.lname" style="border-bottom: 1px #eee solid;"></ion-input>
+
+    <button ion-button color="light" (click)='nextpage()'>Next</button>
+  </ion-slide>
+  <ion-slide>
+    <h1>Upload your picture</h1>
+    <ion-item no-lines no-details>
+      <ion-avatar>
+          <img src="assets/imgs/me.jpg" class="avatar_menu">
+      </ion-avatar>
+    </ion-item>
+    <ion-item no-lines no-details text-center>
+      <button ion-button (click)="uploadPic()">
+        <ion-icon name="add"></ion-icon> &nbsp; Upload a picture
+      </button>
+    </ion-item>
+  </ion-slide>
+  <ion-slide padding>
+    <h1>Notification</h1>
+    <h4>We won't bother you with a lot of notifications.</h4>
+    <button ion-button color="light">Enable Notification</button>
+    <br><br><br><br>
+    <button ion-button end (click)="createContent(userContent)">Start My App</button>
+  </ion-slide>
+</ion-slides>
