@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { AngularFireDatabaseModule } from 'angularfire2/database'
 
 
 //pages
@@ -36,8 +37,11 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ItemDetailsPageModule } from '../pages/item-details/item-details.module';
 import { ForgotpwdPage } from '../pages/forgotpwd/forgotpwd';
 import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
+import { FirstIntroPage } from '../pages/first-intro/first-intro';
+import { FirstIntroPageModule } from '../pages/first-intro/first-intro.module';
 
-
+import { UserService } from '../providers/user-service/user-service';
+import { AddItemService} from '../providers/add-item-service/addItem-service';
 
 
 // let config: SocketIoConfig = {
@@ -54,6 +58,7 @@ import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AboutAppPageModule,
     LoginPageModule,
     SignupPageModule,
@@ -65,7 +70,8 @@ import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
     SettingsPageModule,
     SearchPageModule,
     ItemDetailsPageModule,
-    ForgotpwdPageModule
+    ForgotpwdPageModule,
+    FirstIntroPageModule,
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
@@ -82,13 +88,16 @@ import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
     SettingsPage,
     SearchPage,
     ItemDetailsPage,
-    ForgotpwdPage
+    ForgotpwdPage,
+    FirstIntroPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicesAuth,
+    UserService,
+    AddItemService,
   ]
 })
 export class AppModule {}
