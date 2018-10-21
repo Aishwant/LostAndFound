@@ -10,9 +10,15 @@
 
 <ion-content padding>
     <ion-item  class="inputs-items">
-        <ion-input type="text" placeholder="What did you loose?"></ion-input>
+        <ion-input type="text" placeholder="What did you loose?" [(ngModel)]=items.itemN></ion-input>
     </ion-item>
     <ion-item  class="inputs-items">
-        <ion-input type="text" placeholder="Where do you think you lost it?"></ion-input>
+        <ion-input type="text" placeholder="Where do you think you lost it?" [(ngModel)]=items.itemLocation></ion-input>
     </ion-item>
+    <ion-item class="inputs-items">
+      <ion-textarea placeholder="Description" [(ngModel)]=items.itemDescription></ion-textarea>
+  </ion-item>
+  <div text-right style="margin-top: 20px;">
+    <button ion-button (click)="newLost(items)">Add</button>
+  </div>
 </ion-content>
