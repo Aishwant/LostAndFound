@@ -3,9 +3,10 @@ import { IonicPage, NavController, MenuController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { FeedPage } from '../feed/feed';
 import { AlertController } from 'ionic-angular';
-import { User } from '../../models/user';
+import { User } from '../../models/user_interface';
 import { ServicesAuth } from '../../providers/services-auth/services-auth';
 import { ForgotpwdPage } from '../forgotpwd/forgotpwd';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -15,18 +16,17 @@ import { ForgotpwdPage } from '../forgotpwd/forgotpwd';
 export class LoginPage {
 
   user = {} as User;
-  email: string;
-  password: string;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public menu: MenuController, private sAuth: ServicesAuth) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public menu: MenuController, private sAuth: ServicesAuth, private db: AngularFireDatabase) {
     this.menu.swipeEnable(false);
   }
 
-  login(){
-    if(/^[a-zA-Z0-9_@.]+$/.test(this.email) && this.password){ //validity check
-      this.sAuth.loginVerificationEmail(this.email,this.password)
+  login(user: User){
+    if(/^[a-zA-Z0-9_@.]+$/.test(user.email) && user.password){ //validity check
+      this.sAuth.loginVerificationEmail(user)
       .then(
-        () => this.navCtrl.setRoot(FeedPage),
+        () =>
+        this.navCtrl.setRoot(FeedPage),
         error =>{
           const alert = this.alertCtrl.create({
           title: "Invalid",

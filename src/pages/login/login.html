@@ -17,12 +17,12 @@
           <ion-col class="cred-tabs" (click)="redirectTo_SignUp()">SignUp</ion-col>
         </ion-row>
 
-              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
-              <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+              <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+              <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
 
               <br><br>
 
-              <button ion-button full (click)="login()" class="btn-design">Login</button>
+              <button ion-button full (click)="login(user)" class="btn-design">Login</button>
               <br>
               <div text-center><button clear full (click)="redirectTo_forgotpwd()">Forgot your Password?</button></div>
 
