@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Items } from '../../models/item_interface';
+import { ItemService } from '../../providers/item-service/Item-service';
+import { FeedPage } from '../feed/feed';
+
 /**
  * Generated class for the FoundPage page.
  *
@@ -15,11 +19,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FoundPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  items= {} as Items;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private iServ: ItemService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FoundPage');
+  newFound(items: Items){
+    this.iServ.createItem(items,"Found");
+    this.navCtrl.setRoot(FeedPage);
   }
+
+
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad FoundPage');
+  // }
 
 }
