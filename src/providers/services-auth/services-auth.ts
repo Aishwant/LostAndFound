@@ -1,11 +1,10 @@
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from '../../models/user';
 import * as firebase from 'firebase/app';
 import { AlertController } from 'ionic-angular';
-// import { NavController } from 'ionic-angular';
-import { FeedPage } from '../../pages/feed/feed';
+
+import { User } from '../../models/user_interface';
 
 
 /*
@@ -17,11 +16,7 @@ import { FeedPage } from '../../pages/feed/feed';
 @Injectable()
 export class ServicesAuth{
   private user: firebase.User;
-
   constructor(private afAuth: AngularFireAuth,public alertCtrl: AlertController) {
-    afAuth.authState.subscribe(user => {
-      this.user = user
-    });
   }
 
   // let credentials = {
@@ -29,15 +24,16 @@ export class ServicesAuth{
   //   password: data.password
   // };
 
-  signupWithEmail(email,password){
-      return this.afAuth.auth.createUserWithEmailAndPassword(email,password);
+  signupWithEmail(userIf: User){
+      return this.afAuth.auth.createUserWithEmailAndPassword(userIf.email,userIf.password);
   }
 
-  loginVerificationEmail(email,password){
-    return this.afAuth.auth.signInWithEmailAndPassword(email,password);
+  loginVerificationEmail(userIf: User){
+    return this.afAuth.auth.signInWithEmailAndPassword(userIf.email,userIf.password);
   }
 
-  resetPasswordEmail(email){
-    return this.afAuth.auth.sendPasswordResetEmail(email);
+  resetPasswordEmail(userIf: User){
+    return this.afAuth.auth.sendPasswordResetEmail(userIf.email);
   }
+
 }
