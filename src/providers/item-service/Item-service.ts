@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Items } from '../../models/item_interface';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -19,6 +20,11 @@ export class ItemService {
     if(!this.userId) return;
     this.items= this.db.list(`items/${query}`);
     return this.items;
+  }
+
+  getItemslist(query:string){
+    this.items = this.db.list(`items/${query}`);
+    return this.items.snapshotChanges();
   }
 
   createItem(item: Items,query:string){
