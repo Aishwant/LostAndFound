@@ -19,48 +19,17 @@ export class FeedPage {
   item = 'Found';
 
   items:AngularFireList<Items>;
-  ListRef$: Observable<any[]>;
-  // items: any = {
-  //   "Found Items":[
-  //     {
-  //       itemName:'Computer',
-  //       itemLocation: 'Weir Hall',
-  //       itemDescription: 'A macbook pro 13',
-  //       itemPicture: 'assets/imgs/macbook.jpg'
-  //     },
-  //     {
-  //       itemName:'Book',
-  //       itemLocation: 'J.D. Williams',
-  //       itemDescription: 'Law VS Power',
-  //       itemPicture: 'assets/imgs/book.jpg'
-  //     }
-  //   ],
-  //   "Lost Items":[
-  //     {
-  //       itemName:'Charger',
-  //       itemLocation: 'Library',
-  //       itemDescription: ''
-  //     }
-  //   ]
-  // };
+
   itemArrayF = [];
   itemArrayL = [];
   userId:string;
+  check=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, private db: AngularFireDatabase, private iServ: ItemService, private aAuth: AngularFireAuth) {
     this.menu.swipeEnable(true);
-    // this.items = this.db.list('/items');
-    var data = this.db.database.ref(`items/${this.item}`);
-    // data.on('value', function(snapshot){
-    //   console.log(snapshot.val());
-    //   console.log(snapshot.key);
-    //   this.items = snapshot.val();
-    // });
-    
-    // console.log(this.ListRef$);
   }
 
-  ngOnInit(){
+  ionViewDidLoad(){
     this.iServ.getItemslist("Found").subscribe(
       list => {
         this.itemArrayF = list.map(i => {
@@ -81,25 +50,13 @@ export class FeedPage {
         });
       }
     );
+    this.check = true;
   }
 
   itemName(type:any){
     if(type =="Found") return this.itemArrayF
     else return this.itemArrayL;
   }
-  // itemName(type:any){
-  //   this.items = this.iServ.getItems(type);
-  //   this.ListRef$=this.items.valueChanges();
-
-  //   console.log(this.iServ.getItems(type+"/-LPKaRZQGIYITQpcGao-"));
-  //   console.log(this.ListRef$)
-
-  //   return this.ListRef$;
-  // }
-
-  // itemLocation(){
-  //   return this.items.itemLocation;
-  // }
 
 
   getDetails(itemN: any){
