@@ -18,7 +18,6 @@ import { UserContent } from '../../models/userContent_interface';
 export class UserService {
 
   userContents:AngularFireObject<UserContent> = null;
-
   userId:string;
 
 
@@ -29,14 +28,13 @@ export class UserService {
     })
   }
 
-  getContents(): AngularFireObject<UserContent>{
+  getContents(){
     if(!this.userId) return;
-    this.userContents = this.db.object(`users/${this.userId}`);
-    return this.userContents;
+    return this.db.list(`users/${this.userId}`).snapshotChanges();
   }
 
   createContent(userContent: UserContent){
-    this.getContents();
+    this.userContents = this.db.object(`users/${this.userId}`);
     this.userContents.set(userContent)
   }
 
