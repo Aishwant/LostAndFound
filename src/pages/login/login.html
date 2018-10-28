@@ -19,7 +19,10 @@
 
               <ion-input class="input-field" type="text" placeholder="Email" [(ngModel)]="user.email"></ion-input>
               <ion-input class="input-field" type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
-
+              <ion-item>
+                <ion-label>Remember Login:</ion-label>
+                <ion-toggle [checked]="toggleState" (ionChange)="stateChangeToggle()"></ion-toggle>
+              </ion-item>
               <br><br>
 
               <button ion-button full (click)="login(user)" class="btn-design">Login</button>
