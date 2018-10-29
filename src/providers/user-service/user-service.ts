@@ -30,8 +30,13 @@ export class UserService {
 
   getContents(){
     if(!this.userId) return;
-    return this.db.list(`users/${this.userId}`).snapshotChanges();
+    return this.db.database.ref(`users/${this.userId}`);
   }
+
+  getUsers(uid:string){
+    return this.db.database.ref(`users/${uid}`);
+  }
+
 
   createContent(userContent: UserContent){
     this.userContents = this.db.object(`users/${this.userId}`);
