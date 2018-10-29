@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { ItemDetailsPage } from '../item-details/item-details';
 import { UserService } from '../../providers/user-service/user-service';
-import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { Items } from '../../models/item_interface';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { ItemService } from '../../providers/item-service/Item-service';
-import { Observable } from 'rxjs/Observable';
 
 
 @IonicPage()
@@ -51,8 +49,9 @@ export class FeedPage {
         });
       }
     );
-    this.filterItems();
+    this.filterItems(this.item);
   }
+
   ionViewDidLoad(){
     this.check = true;
   }
@@ -72,9 +71,11 @@ export class FeedPage {
   }
 
   filterItems(item){
-    if(item == "Found")
-      this.itemArrayF = this.iServ.filterItems(this.searchVal,0);
-    else if(item == "Lost")
-      this.itemArrayL = this.iServ.filterItems(this.searchVal,1);
+    try{
+      if(item == "Found")
+        this.itemArrayF = this.iServ.filterItems(this.searchVal,0);
+      else if(item == "Lost")
+        this.itemArrayL = this.iServ.filterItems(this.searchVal,1);
+    }catch{}
   }
 }
