@@ -9,11 +9,33 @@ export class ItemService {
 
   items: AngularFireList<Items>;
   userId: string;
+  itemArray=[];
 
   constructor(private db: AngularFireDatabase, private aAuth: AngularFireAuth) {
     this.aAuth.authState.subscribe(user => {
       if (user) this.userId = user.uid;
     })
+    this.getItemslist("Found").subscribe(
+      list => {
+        this.itemArray[0] = list.map(i => {
+          return {
+            $key: i.key,
+            ...i.payload.val()
+          }
+        });
+      }
+    );
+    this.getItemslist("Lost").subscribe(
+      list => {
+        this.itemArray[1] = list.map(i => {
+          return {
+            $key: i.key,
+            ...i.payload.val()
+          }
+        });
+      }
+    );
+
   }
 
   getItems(query: string):AngularFireList<Items>{
@@ -31,5 +53,12 @@ export class ItemService {
     this.items =this.getItems(query);
     item.userId = this.userId;
     this.items.push(item);
+  }
+
+  filterItems(val,det){
+    this.itemArray[2]=this.itemArray[0].concat(this.itemArray[1]);
+    return this.itemArray[det].filter((item)=>{
+      return item.itemN.toLowerCase().indexOf(val.toLowerCase()) > -1;
+    })
   }
 }
