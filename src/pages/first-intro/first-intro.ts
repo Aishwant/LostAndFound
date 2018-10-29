@@ -5,7 +5,8 @@ import { Slides } from 'ionic-angular';
 import { FeedPage } from '../feed/feed';
 import { UserContent } from '../../models/userContent_interface';
 import { UserService } from '../../providers/user-service/user-service';
-import { ServicesAuth } from '../../providers/services-auth/services-auth';
+import { CameraService } from '../../providers/camera-service/camera-service';
+import { Observable } from 'rxjs';
 /**
  * Generated class for the FirstIntroPage page.
  *
@@ -23,17 +24,16 @@ export class FirstIntroPage {
 
   userContent= {} as UserContent;
   userId:string;
+  base64Image:any="assets/imgs/me.jpg";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,private uServ: UserService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,private uServ: UserService, private camServ: CameraService) {
   }
 
-  slideChanged() {
-    let currentIndex = this.slides.getActiveIndex();
-    console.log('Current index is', currentIndex);
+  nextpage(){
+    this.slides.slideNext();
   }
 
   createContent(userContent : UserContent){
-
     if(!userContent.fname){
       const alert = this.alertCtrl.create({
         title: "Please fill your Name",
@@ -47,13 +47,13 @@ export class FirstIntroPage {
     }
   }
 
-  uploadPic(){
+  alertPic(){
     const alert= this.alertCtrl.create({
       title:'How do you want to upload?',
       buttons:[{
         text:'Take a picture',
         handler:()=> {
-          this.camera();
+          this.openCamera();
         }
       },
       {
@@ -65,11 +65,25 @@ export class FirstIntroPage {
     });
     alert.present();
   }
-  camera(){
-    console.log('Take a picture');
+  openCamera(){
+    this.base64Image = this.camServ.openCamera();
+    this.alert();
+  }
+  alert(){
+    const alert = this.alertCtrl.create({
+      title:"Feature Coming soon",
+      buttons:["Ok"]
+    });
+    alert.present();
   }
 
   fromGallery(){
-    console.log('From Gallery');
+    this.base64Image = this.camServ.fromGallery();
+    this.alert();
   }
+
+  notification(){
+    this.alert();
+  }
+
 }

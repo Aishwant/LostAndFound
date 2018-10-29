@@ -40,8 +40,14 @@ import { ForgotpwdPageModule} from '../pages/forgotpwd/forgotpwd.module';
 import { FirstIntroPage } from '../pages/first-intro/first-intro';
 import { FirstIntroPageModule } from '../pages/first-intro/first-intro.module';
 
+
 import { UserService } from '../providers/user-service/user-service';
 import { ItemService} from '../providers/item-service/Item-service';
+import { CameraService } from '../providers/camera-service/camera-service';
+import { Camera } from '@ionic-native/camera';
+import { HttpClientModule } from '@angular/common/http';
+import { LogoutPage } from '../pages/logout/logout';
+import { LogoutPageModule } from '../pages/logout/logout.module';
 
 
 // let config: SocketIoConfig = {
@@ -72,6 +78,8 @@ import { ItemService} from '../providers/item-service/Item-service';
     ItemDetailsPageModule,
     ForgotpwdPageModule,
     FirstIntroPageModule,
+    LogoutPageModule,
+    HttpClientModule,
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
@@ -90,6 +98,7 @@ import { ItemService} from '../providers/item-service/Item-service';
     ItemDetailsPage,
     ForgotpwdPage,
     FirstIntroPage,
+    LogoutPage,
   ],
   providers: [
     StatusBar,
@@ -98,6 +107,8 @@ import { ItemService} from '../providers/item-service/Item-service';
     ServicesAuth,
     UserService,
     ItemService,
+    CameraService,
+    Camera,
   ]
 })
 export class AppModule {}

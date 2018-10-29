@@ -5,12 +5,12 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <button ion-item detail-none style="background-color:#eee">
+        <button ion-item detail-none style="background-color:#eee" (click)="alertPic()">
             <ion-avatar>
                 <img src="assets/imgs/me.jpg" class="avatar_menu">
             </ion-avatar>
         </button>
-        <!-- <p color="#000">{{ (UserContents | async)?.fname }}</p> -->
+        <p color="#000">{{ userContent?.fname }} {{ userContent?.lname }}</p>
         <ion-list no-border detail-none>
             <button menuClose ion-item detail-none *ngFor = "let p of pages" (click)="openPage(p)">
                 <ion-icon [name]="p.icon"> &nbsp; &nbsp; </ion-icon>{{ p.title }}

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, NavController } from 'ionic-angular';
+import { Nav, Platform, NavController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -11,7 +11,8 @@ import { AboutAppPage } from '../pages/about-app/about-app';
 import { ListchatPage } from '../pages/listchat/listchat';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
-import { AngularFireObject } from 'angularfire2/database';
+import { LogoutPage } from '../pages/logout/logout';
+import { UserService } from '../providers/user-service/user-service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,16 +20,19 @@ export class MyApp {
   rootPage:any = LoginPage;
 
   @ViewChild(Nav) nav:Nav;
-
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  Usercontent=[];
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private alert: AlertController,private uServ:UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+
 
     this.pages = [
       { title: 'Home', component: FeedPage, icon: 'home' },
@@ -38,7 +42,7 @@ export class MyApp {
       { title: 'Chat', component: ListchatPage, icon:'chatbubbles' },
       { title: 'Settings', component: SettingsPage, icon:'settings' },
       { title: 'About', component: AboutAppPage, icon:'information-circle' },
-      { title: 'LogOut', component: LoginPage, icon:'exit' },
+      { title: 'LogOut', component: LogoutPage, icon:'exit' },
     ];
   }
 
@@ -46,5 +50,16 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  alertPic(){
+    const alert = this.alert.create({
+      title:'Feature coming out soon',
+      buttons:['OK']
+    });
+    alert.present();
+  }
+
+  ionViewDidLoad(){
+
+  }
 }
 
