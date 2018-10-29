@@ -17,5 +17,15 @@
 
 
 <ion-content padding>
+    <ion-searchbar [(ngModel)]="searchVal" placeholder="Filter Items with Cancel" showCancelButton color="danger" (ionInput)="filterItems()"></ion-searchbar>
 
+    <ion-list style="margin:0" inset *ngIf="searchVal">
+      <button ion-item detail-none *ngFor="let i of items" (click)="getDetails(i)">
+        <ion-card padding><!-- [color]="getColor(item)"> -->
+          Item: {{ i.itemN }} <br>
+          Location: {{ i.itemLocation }} <br>
+          Description: {{ i.itemDescription }} <br>
+        </ion-card>
+      </button>
+    </ion-list>
 </ion-content>
