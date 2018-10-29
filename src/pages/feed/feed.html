@@ -20,13 +20,14 @@
       </ion-segment-button>
     </ion-segment>
 
+    <ion-searchbar [(ngModel)]="searchVal" placeholder="Filter Items with Cancel" showCancelButton color="danger" (ionInput)="filterItems(item)"></ion-searchbar>
+
     <ion-list style="margin:0" inset>
       <button ion-item detail-none *ngFor="let i of itemName(item)" (click)="getDetails(i)">
         <ion-card padding [color]="getColor(item)">
           Item: {{ i.itemN }} <br>
           Location: {{ i.itemLocation }} <br>
           Description: {{ i.itemDescription }} <br>
-          <p style="color:#f6f6f6;font-size: 9px; margin-top: 5px">Posted by: </p>
         </ion-card>
       </button>
     </ion-list>

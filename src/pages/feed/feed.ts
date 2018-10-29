@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { ItemDetailsPage } from '../item-details/item-details';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from '../../providers/user-service/user-service';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Items } from '../../models/item_interface';
@@ -18,18 +17,20 @@ export class FeedPage {
 
   item = 'Found';
 
-  items:AngularFireList<Items>;
 
-  itemArrayF = [];
+  itemArrayF:Array<any>;
   itemArrayL = [];
-  userId:string;
+  UserContent =[];
+  postUser=[];
+  usersIds=[];
   check=false;
+  searchVal:string='';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, private db: AngularFireDatabase, private iServ: ItemService, private aAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, private db: AngularFireDatabase, private iServ: ItemService, private uServ: UserService) {
     this.menu.swipeEnable(true);
   }
 
-  ionViewDidLoad(){
+  ngOnInit(){
     this.iServ.getItemslist("Found").subscribe(
       list => {
         this.itemArrayF = list.map(i => {
@@ -50,6 +51,9 @@ export class FeedPage {
         });
       }
     );
+    this.filterItems();
+  }
+  ionViewDidLoad(){
     this.check = true;
   }
 
@@ -58,13 +62,19 @@ export class FeedPage {
     else return this.itemArrayL;
   }
 
-
   getDetails(itemN: any){
     this.navCtrl.push(ItemDetailsPage,{item: itemN});
   }
+
   getColor(item){
     if(item == "Found") return "primaryGreen";
     else return "primaryRed";
   }
 
+  filterItems(item){
+    if(item == "Found")
+      this.itemArrayF = this.iServ.filterItems(this.searchVal,0);
+    else if(item == "Lost")
+      this.itemArrayL = this.iServ.filterItems(this.searchVal,1);
+  }
 }
