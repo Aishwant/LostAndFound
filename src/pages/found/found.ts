@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { Items } from '../../models/item_interface';
 import { ItemService } from '../../providers/item-service/Item-service';
@@ -21,17 +21,21 @@ export class FoundPage {
 
   items= {} as Items;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private iServ: ItemService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private iServ: ItemService, private alertCtrl: AlertController) {
   }
 
   newFound(items: Items){
-    this.iServ.createItem(items,"Found");
-    this.navCtrl.setRoot(FeedPage);
+    if(items.itemN&&items.itemDescription&&items.itemLocation&&items.itemN.trim()!=''&&items.itemDescription.trim()!=''&&items.itemLocation.trim()!=''){
+      this.iServ.createItem(items,"Found");
+      this.navCtrl.setRoot(FeedPage);
+    }else{
+      const alert = this.alertCtrl.create({
+        subTitle: "Please fill the fields correctly",
+        buttons:['OK']
+      });
+      alert.present();
+    }
   }
 
-
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad FoundPage');
-  // }
 
 }
