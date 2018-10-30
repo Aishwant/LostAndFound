@@ -48,6 +48,8 @@ import { Camera } from '@ionic-native/camera';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutPage } from '../pages/logout/logout';
 import { LogoutPageModule } from '../pages/logout/logout.module';
+import { EditPageModule } from '../pages/edit/edit.module';
+import { EditPage } from '../pages/edit/edit';
 
 
 // let config: SocketIoConfig = {
@@ -80,6 +82,7 @@ import { LogoutPageModule } from '../pages/logout/logout.module';
     FirstIntroPageModule,
     LogoutPageModule,
     HttpClientModule,
+    EditPageModule,
     // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
@@ -99,6 +102,7 @@ import { LogoutPageModule } from '../pages/logout/logout.module';
     ForgotpwdPage,
     FirstIntroPage,
     LogoutPage,
+    EditPage,
   ],
   providers: [
     StatusBar,
