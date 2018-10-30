@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ChatPage page.
@@ -17,7 +17,7 @@ export class ChatPage {
 
   user:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     this.user = navParams.get('userN');
   }
 
@@ -37,4 +37,11 @@ export class ChatPage {
     return "You're welcome. Hope you want lose it again :P have a good day";
   }
 
+  send(){
+    const alert = this.alertCtrl.create({
+      subTitle: "Feature coming out soon",
+      buttons:['OK']
+    });
+    alert.present();
+  }
 }
