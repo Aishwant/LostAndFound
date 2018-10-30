@@ -4,6 +4,8 @@ import { ItemDetailsPage } from '../item-details/item-details';
 import { UserService } from '../../providers/user-service/user-service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ItemService } from '../../providers/item-service/Item-service';
+import { FoundPage } from '../found/found';
+import { LostPage } from '../lost/lost';
 
 
 @IonicPage()
@@ -77,5 +79,13 @@ export class FeedPage {
       else if(item == "Lost")
         this.itemArrayL = this.iServ.filterItems(this.searchVal,1);
     }catch{}
+  }
+
+  found(){
+    this.navCtrl.push(FoundPage);
+  }
+
+  lost(){
+    this.navCtrl.push(LostPage);
   }
 }

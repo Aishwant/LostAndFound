@@ -31,4 +31,14 @@
         </ion-card>
       </button>
     </ion-list>
+    <!-- <ion-fab right bottom>
+        <button ion-fab><ion-icon name="plus"></ion-icon></button>
+    </ion-fab> -->
+    <ion-fab bottom right >
+        <button ion-fab><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <button color="primaryGreen" class="border-btn" ion-fab padding (click)="found()"><ion-icon name="hand"></ion-icon></button>
+          <button color="primaryRed" class="border-btn" ion-fab padding (click)="lost()"><ion-icon name="help"></ion-icon></button>
+        </ion-fab-list>
+      </ion-fab>
 </ion-content>
