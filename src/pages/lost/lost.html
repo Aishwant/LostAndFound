@@ -18,6 +18,9 @@
     <ion-item class="inputs-items">
       <ion-textarea placeholder="Description" [(ngModel)]=items.itemDescription></ion-textarea>
   </ion-item>
+  <div padding>
+    <button ion-button (click)="upload()">Upload</button>
+  </div>
   <div text-right style="margin-top: 20px;">
     <button ion-button (click)="newLost(items)">Add</button>
   </div>
