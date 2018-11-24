@@ -1,7 +1,7 @@
 <ion-slides>
   <ion-slide>
     <h1>Welcome Aboard</h1>
-    <h5>Let's get to know you</h5>
+    <h5>Let's get to know you. You only do this ONCE!</h5>
     <h6>slide from right to left</h6>
     <-----
   </ion-slide>
@@ -13,16 +13,17 @@
   </ion-slide>
   <ion-slide>
     <h1>Upload your picture</h1>
-    <ion-item no-lines no-details>
-      <ion-avatar>
-          <img [src]="base64Image" id="myImage" class="avatar_menu">
-      </ion-avatar>
-    </ion-item>
     <ion-item no-lines no-details text-center>
       <button ion-button (click)="alertPic()">
         <ion-icon name="add"></ion-icon> &nbsp; Upload a picture
       </button>
     </ion-item>
+    <ion-item no-lines no-details>
+      <ion-avatar>
+          <img [src]="base64Image" id="myImage" class="avatar_menu">
+      </ion-avatar>
+    </ion-item>
+
     <button ion-button color="light" (click)='nextpage()'>Next</button>
   </ion-slide>
   <ion-slide padding>

@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, normalizeURL } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { FeedPage } from '../feed/feed';
 import { UserContent } from '../../models/userContent_interface';
 import { UserService } from '../../providers/user-service/user-service';
-import { CameraService } from '../../providers/camera-service/camera-service';
 import { Observable } from 'rxjs';
-/**
- * Generated class for the FirstIntroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'firebase/storage';
+import { AngularFireStorage } from 'angularfire2/storage';
+
 
 @IonicPage()
 @Component({
@@ -24,9 +23,21 @@ export class FirstIntroPage {
 
   userContent= {} as UserContent;
   userId:string;
-  base64Image:any="assets/imgs/me.jpg";
+  base64Image:any;
+  imageURI:any;
+  obj: Observable<string>;
+  task;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,private uServ: UserService, private camServ: CameraService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private uServ: UserService,
+    private camera: Camera,
+    private afStorage: AngularFireStorage
+    )
+  {
+
   }
 
   nextpage(){
@@ -47,6 +58,10 @@ export class FirstIntroPage {
     }
   }
 
+  ionViewDidLoad(){
+    this.base64Image;
+  }
+
   alertPic(){
     const alert= this.alertCtrl.create({
       title:'How do you want to upload?',
@@ -65,25 +80,47 @@ export class FirstIntroPage {
     });
     alert.present();
   }
+
   openCamera(){
-    this.base64Image = this.camServ.openCamera();
-    this.alert();
-  }
-  alert(){
-    const alert = this.alertCtrl.create({
-      title:"Feature Coming soon",
-      buttons:["Ok"]
+    // try{
+    const options: CameraOptions = {
+      quality: 50,
+      targetHeight: 600,
+      targetWidth: 600,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    }
+    const img = this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;
+      this.uploadTofirebase(this.base64Image);
+    }, (err) => {
+      //handle error
     });
-    alert.present();
   }
 
   fromGallery(){
-    this.base64Image = this.camServ.fromGallery();
-    this.alert();
+      const options: CameraOptions = {
+        quality: 50,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        saveToPhotoAlbum:false
+      }
+      this.camera.getPicture(options).then((imageData) => {
+        this.base64Image = 'data:image/jpeg;base64,'+imageData;
+        this.uploadTofirebase(this.base64Image);
+      }, (err) => {
+        //handle error
+      });
+
+  }
+
+  uploadTofirebase(event){
+    this.afStorage.ref('img/demo.jpg').putString(event,'data_url');
   }
 
   notification(){
-    this.alert();
+    // this.alert();
   }
 
 }
