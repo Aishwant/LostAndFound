@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ServicesAuth } from '../../providers/services-auth/services-auth';
 
 /**
  * Generated class for the EditPage page.
@@ -15,11 +16,44 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  changePassword;
+  updateProfile;
+
+  newPwd:string;
+  fname:string;
+  lname:string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sAuth: ServicesAuth, private alertCtrl: AlertController) {
+    this.changePassword = this.navParams.get('changePassword');
+    this.updateProfile = this.navParams.get('updateProfile');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditPage');
+  updatePwd(){
+    this.sAuth.changePassword(this.newPwd)
+    .then(
+      () => {
+        const alert = this.alertCtrl.create({
+          subTitle: "Password updated",
+          buttons: ['OK']
+        })
+        alert.present();
+      },
+      error =>{
+        const alert = this.alertCtrl.create({
+          subTitle: error,
+          buttons: ['OK']
+        })
+        alert.present();
+      }
+    )
+
   }
 
+  updateProf(){
+    const alert = this.alertCtrl.create({
+      subTitle: "Feature Coming Soon",
+      buttons: ['OK']
+    })
+    alert.present();
+  }
 }

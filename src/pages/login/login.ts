@@ -41,6 +41,7 @@ export class LoginPage {
           buttons: ['OK']
         });
         alert.present();
+        localStorage.clear();
         }
         );
     }else{

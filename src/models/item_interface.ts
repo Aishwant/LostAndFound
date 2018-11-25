@@ -3,4 +3,5 @@ export interface Items{
     itemLocation: string;
     itemDescription: string;
     userId: string;
+    itemImgLocation: string;
 }

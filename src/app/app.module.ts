@@ -9,6 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { HttpModule } from '@angular/http';
 
 
 //pages
@@ -43,13 +44,15 @@ import { FirstIntroPageModule } from '../pages/first-intro/first-intro.module';
 
 import { UserService } from '../providers/user-service/user-service';
 import { ItemService} from '../providers/item-service/Item-service';
-import { CameraService } from '../providers/camera-service/camera-service';
 import { Camera } from '@ionic-native/camera';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutPage } from '../pages/logout/logout';
 import { LogoutPageModule } from '../pages/logout/logout.module';
 import { EditPageModule } from '../pages/edit/edit.module';
 import { EditPage } from '../pages/edit/edit';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+
 
 
 // let config: SocketIoConfig = {
@@ -67,6 +70,8 @@ import { EditPage } from '../pages/edit/edit';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     AboutAppPageModule,
     LoginPageModule,
     SignupPageModule,
@@ -81,6 +86,7 @@ import { EditPage } from '../pages/edit/edit';
     ForgotpwdPageModule,
     FirstIntroPageModule,
     LogoutPageModule,
+    HttpModule,
     HttpClientModule,
     EditPageModule,
     // SocketIoModule.forRoot(config)
@@ -111,7 +117,6 @@ import { EditPage } from '../pages/edit/edit';
     ServicesAuth,
     UserService,
     ItemService,
-    CameraService,
     Camera,
   ]
 })

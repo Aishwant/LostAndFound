@@ -19,8 +19,8 @@
       </button>
     </ion-item>
     <ion-item no-lines no-details>
-      <ion-avatar>
-          <img [src]="base64Image" id="myImage" class="avatar_menu">
+      <ion-avatar *ngIf="imgCheck">
+          <img [src]="userContent?.imgLocation" id="myImage" class="avatar_menu">
       </ion-avatar>
     </ion-item>
 

@@ -17,6 +17,7 @@
       Description: {{ itemDescription }}<br><br>
 
       Posted by: {{ getPosterN()?.fname}}<br><br>
+      <img *ngIf="itemImgLocation" src = "{{ itemImgLocation }}">
 
       <button ion-button (click)="alert()">Chat</button>
     </ion-card-content>

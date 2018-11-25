@@ -1,15 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, normalizeURL } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { FeedPage } from '../feed/feed';
 import { UserContent } from '../../models/userContent_interface';
 import { UserService } from '../../providers/user-service/user-service';
-import { Observable } from 'rxjs';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import 'firebase/storage';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 
@@ -22,11 +18,9 @@ export class FirstIntroPage {
   @ViewChild(Slides) slides: Slides;
 
   userContent= {} as UserContent;
-  userId:string;
   base64Image:any;
-  imageURI:any;
-  obj: Observable<string>;
-  task;
+  imageURI:string="";
+  imgCheck=false;
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +28,9 @@ export class FirstIntroPage {
     public alertCtrl: AlertController,
     private uServ: UserService,
     private camera: Camera,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private userServ: UserService,
+    private cdr: ChangeDetectorRef
     )
   {
 
@@ -53,6 +49,7 @@ export class FirstIntroPage {
       alert.present();
     }
     else{
+    //  this.userContent.imgLocation = this.imageURI;
      this.uServ.createContent(userContent);
      this.navCtrl.setRoot(FeedPage);
     }
@@ -82,7 +79,7 @@ export class FirstIntroPage {
   }
 
   openCamera(){
-    // try{
+
     const options: CameraOptions = {
       quality: 50,
       targetHeight: 600,
@@ -91,17 +88,20 @@ export class FirstIntroPage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
     }
-    const img = this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
       this.uploadTofirebase(this.base64Image);
     }, (err) => {
       //handle error
     });
+    this.imgCheck=true
   }
 
   fromGallery(){
       const options: CameraOptions = {
         quality: 50,
+        targetHeight: 600,
+      targetWidth: 600,
         destinationType: this.camera.DestinationType.DATA_URL,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum:false
@@ -112,15 +112,27 @@ export class FirstIntroPage {
       }, (err) => {
         //handle error
       });
-
+      this.imgCheck=true;
   }
 
   uploadTofirebase(event){
-    this.afStorage.ref('img/demo.jpg').putString(event,'data_url');
+
+    let store = this.afStorage.ref(`img/users/${this.userServ.userId}.jpg`).putString(event,'data_url').then(url =>{
+      url.ref.getDownloadURL().then(imgurl=>{
+        this.userContent.imgLocation=imgurl;
+      })
+    });
+
   }
 
   notification(){
-    // this.alert();
+    this.alert();
   }
-
+  alert(){
+    const alert = this.alertCtrl.create({
+      title: "Feature coming soon",
+      buttons: ['OK']
+    })
+    alert.present();
+  }
 }

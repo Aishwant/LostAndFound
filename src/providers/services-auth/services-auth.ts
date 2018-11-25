@@ -55,4 +55,8 @@ export class ServicesAuth{
     return this.afAuth.auth.sendPasswordResetEmail(userIf.email);
   }
 
+  changePassword(newpwd){
+    return this.afAuth.auth.currentUser.updatePassword(newpwd);
+  }
+
 }
