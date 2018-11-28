@@ -17,15 +17,41 @@
     </ion-footer>
   </div>
 
-  <div *ngIf="updateProfile"> <!-- To change your password -->
+  <div *ngIf="updateProfile"> <!-- To update your profile -->
+    <button ion-item detail-none (click)="alertPic()">
+        <ion-avatar>
+            <img [src]="userContent?.imgLocation" class="avatar_css" onError="this.src='assets/imgs/me.jpg';">
+        </ion-avatar>
+    </button>
     <ion-item>
-      <ion-input [(ngModel)]="fname" type="text" placeholder="First Name"></ion-input>
+      <ion-input [(ngModel)]="userContentUpdate.fname" type="text" [placeholder]="userContent?.fname"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-input [(ngModel)]="lname" type="text" placeholder="Last Name"></ion-input>
+        <ion-input [(ngModel)]="userContentUpdate.lname" type="text" [placeholder]="userContent?.lname"></ion-input>
     </ion-item>
     <ion-footer padding>
       <button ion-button bottom full (click)="updateProf()">Update</button>
+    </ion-footer>
+  </div>
+
+  <div *ngIf="updateItem"><!-- To edit your items-->
+    <ion-item  class="inputs-items">
+        <ion-input type="text" [placeholder]="items.itemN" [(ngModel)]=items.itemN></ion-input>
+    </ion-item>
+    <ion-item  class="inputs-items">
+        <ion-input type="text" [placeholder]="items.itemLocation" [(ngModel)]=items.itemLocation></ion-input>
+    </ion-item>
+    <ion-item class="inputs-items">
+        <ion-textarea placeholder="items.itemDescription" [(ngModel)]=items.itemDescription></ion-textarea>
+    </ion-item>
+
+    <ion-card *ngIf="queryFL==='Lost'">
+      <p align="center"><img [src] = "items.itemImgLocation" *ngIf="showPic" style="width:50%;height:50%"></p>
+      <button ion-button (click)="alertPic()">Edit picture</button>
+      <button ion-button (click)=deletePic()>Delete Image</button>
+    </ion-card>
+    <ion-footer padding>
+      <button ion-button bottom full (click)="updateItemOn(items)">Update Item</button>
     </ion-footer>
   </div>
 

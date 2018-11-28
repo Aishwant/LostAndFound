@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, normalizeURL } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
@@ -7,6 +7,7 @@ import { UserContent } from '../../models/userContent_interface';
 import { UserService } from '../../providers/user-service/user-service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { DiagnosticProvider } from '../../providers/diagnostic/diagnostic';
 
 
 @IonicPage()
@@ -30,7 +31,7 @@ export class FirstIntroPage {
     private camera: Camera,
     private afStorage: AngularFireStorage,
     private userServ: UserService,
-    private cdr: ChangeDetectorRef
+    private diagnosisServ: DiagnosticProvider
     )
   {
 
@@ -79,7 +80,7 @@ export class FirstIntroPage {
   }
 
   openCamera(){
-
+    // if (this.diagnosisServ.diagnosticRequestCameraAccess()){
     const options: CameraOptions = {
       quality: 50,
       targetHeight: 600,
@@ -95,6 +96,7 @@ export class FirstIntroPage {
       //handle error
     });
     this.imgCheck=true
+    // }
   }
 
   fromGallery(){

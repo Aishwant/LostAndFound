@@ -36,7 +36,8 @@ export class FeedPage {
         this.itemArrayF = list.map(i => {
           return {
             $key: i.key,
-            ...i.payload.val()
+            ...i.payload.val(),
+            queryFL: "Found"
           }
         });
       }
@@ -46,7 +47,8 @@ export class FeedPage {
         this.itemArrayL = list.map(i => {
           return {
             $key: i.key,
-            ...i.payload.val()
+            ...i.payload.val(),
+            queryFL: "Lost"
           }
         });
       }

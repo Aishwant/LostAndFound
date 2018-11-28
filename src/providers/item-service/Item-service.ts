@@ -61,4 +61,12 @@ export class ItemService {
       return item.itemN.toLowerCase().indexOf(val.toLowerCase()) > -1;
     })
   }
+
+  updateItem(item: Items,query:any,$key:any){
+    return this.getItems(query).update($key,item);
+  }
+
+  deleteItem(key:string,query:string){
+    return this.getItems(query).remove(key);
+  }
 }

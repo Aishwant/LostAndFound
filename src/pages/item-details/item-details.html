@@ -17,9 +17,13 @@
       Description: {{ itemDescription }}<br><br>
 
       Posted by: {{ getPosterN()?.fname}}<br><br>
-      <img *ngIf="itemImgLocation" src = "{{ itemImgLocation }}">
+      <ion-card *ngIf="itemImgLocation">
+        <p align="center"><img *ngIf="itemImgLocation" style="width:50%;height:50%" src = "{{ itemImgLocation }}"></p>
+      </ion-card>
+      <button ion-button *ngIf="userOpt" (click)="edit()">Edit</button>
+      <button ion-button *ngIf="userOpt" (click)="delete()">Remove</button>
 
-      <button ion-button (click)="alert()">Chat</button>
+      <button ion-button *ngIf="!userOpt" (click)="alert()">Chat</button>
     </ion-card-content>
   </ion-card>
 </ion-content>

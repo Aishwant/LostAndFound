@@ -19,7 +19,7 @@
       <ion-textarea placeholder="Description" [(ngModel)]=items.itemDescription></ion-textarea>
   </ion-item>
   <div padding>
-    <button ion-button (click)="upload()">Upload Image</button>
+    <button ion-button (click)="upload()">Upload Image</button> <h5>(Optional)</h5>
   </div>
   <p *ngIf="imgCheck" align="center"><img [src]="items?.itemImgLocation"></p>
   <div text-right style="margin-top: 20px;">

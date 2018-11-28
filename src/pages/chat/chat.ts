@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Observable } from 'rxjs';
+import { Socket } from 'ng-socket-io';
 
 /**
  * Generated class for the ChatPage page.
@@ -16,15 +18,38 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 export class ChatPage {
 
   user:any;
+  fnameFrom:string;
+  fnameTo:string;
+  messagesOld=[];
+  message = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private socket: Socket) {
     this.user = navParams.get('userN');
+    this.getMessages().subscribe(message => {
+      this.messagesOld.push(message);
+    });
+
+    this.getUsers().subscribe(data =>{
+      let user1 = data['user'];
+    })
+
+    // this.getUsers().subscribe(data => {
+    //   let user = data['user'];
+    //   if(data['event'] === 'left') {
+
+    //   }else{
+
+    //   }
+    // })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad ChatPage');
+  // }
 
+  ionViewWillLeave(){
+    this.socket.disconnect();
+  }
   checkNewMsg(){
     return true;
   }
@@ -38,10 +63,38 @@ export class ChatPage {
   }
 
   send(){
-    const alert = this.alertCtrl.create({
-      subTitle: "Feature coming out soon",
-      buttons:['OK']
+    this.socket.emit('add-message',{text:this.message});
+    this.message = '';
+    // const alert = this.alertCtrl.create({
+    //   subTitle: "Feature coming out soon",
+    //   buttons:['OK']
+    // });
+    // alert.present();
+  }
+
+  // getUsers(){
+  //   let observable = new Observable(ob =>{
+  //     this.socket.on('users-changed',data=>{
+  //       ob.next(data);
+  //     })
+  //   });
+  //   return observable;
+  // }
+  getMessages(){
+    let observable = new Observable(ob => {
+      this.socket.on('message',data=>{
+        ob.next(data);
+      })
     });
-    alert.present();
+    return observable;
+  }
+
+  getUsers(){
+    let observable = new Observable(ob => {
+      this.socket.on('users-changed',data=>{
+        ob.next(data);
+      })
+    });
+    return observable;
   }
 }

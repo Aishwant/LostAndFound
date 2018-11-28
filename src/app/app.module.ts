@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-// import { SocketIoModule, SocketIoConfig } from 'socket.io';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -52,13 +52,15 @@ import { EditPageModule } from '../pages/edit/edit.module';
 import { EditPage } from '../pages/edit/edit';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { DiagnosticProvider } from '../providers/diagnostic/diagnostic';
+import { Diagnostic } from '@ionic-native/diagnostic'
 
 
 
-// let config: SocketIoConfig = {
-//   url: "",
-//   options: {}
-// }
+let config: SocketIoConfig = {
+  url: "http://130.74.227.234:3000",
+  options: {}
+}
 
 @NgModule({
   declarations: [
@@ -89,7 +91,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     HttpModule,
     HttpClientModule,
     EditPageModule,
-    // SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -118,6 +120,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     UserService,
     ItemService,
     Camera,
+    DiagnosticProvider,
+    Diagnostic
   ]
 })
 export class AppModule {}
