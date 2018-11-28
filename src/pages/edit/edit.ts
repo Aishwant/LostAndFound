@@ -7,6 +7,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { UserContent } from '../../models/userContent_interface';
 import { ItemService } from '../../providers/item-service/Item-service';
 import { Items } from '../../models/item_interface';
+import { SettingsPage } from '../settings/settings';
 
 /**
  * Generated class for the EditPage page.
@@ -33,9 +34,9 @@ export class EditPage {
   fname:string;
   lname:string;
   userContent={} as UserContent;
+
   base64Image:any;
   imageCheck=false;
-  imgURL:string;
 
   userContentUpdate = {} as UserContent;
 
@@ -44,6 +45,7 @@ export class EditPage {
   $key:any;
   queryFL:any;
   showPic=true;
+  itemPicShow:any;
 
   itemContent = {} as Items;
 
@@ -96,15 +98,18 @@ export class EditPage {
 
   //user content update
   updateProf(){
-    if(this.imageCheck) this.uploadTofirebase(this.base64Image);
     this.userServ.updateContent(this.userContentUpdate);
+    this.navCtrl.setRoot(SettingsPage);
   }
+
   alert(){
     const alert1=this.alertCtrl.create({
       title:"Feature coming soon",
       buttons:["OK"]
     })
+    alert1.present();
   }
+
   alertPic(){
     const alert= this.alertCtrl.create({
       title:'How do you want to upload?',
@@ -112,14 +117,14 @@ export class EditPage {
         text:'Take a picture',
         handler:()=> {
           this.openCamera();
-          this.alert();
+          // this.alert();
         }
       },
       {
         text:'From Gallery',
         handler:()=> {
           this.fromGallery();
-          this.alert();
+          // this.alert();
         }
       }]
     });
@@ -138,7 +143,7 @@ export class EditPage {
     }
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.imageCheck=true;
+      this.uploadTofirebase(this.base64Image);
     }, (err) => {
       //handle error
     });
@@ -155,18 +160,26 @@ export class EditPage {
       }
       this.camera.getPicture(options).then((imageData) => {
         this.base64Image = 'data:image/jpeg;base64,'+imageData;
-        this.imageCheck=true;
+        this.uploadTofirebase(this.base64Image);
       }, (err) => {
         //handle error
       });
   }
 
   uploadTofirebase(event){
-    this.afStorage.ref(`img/users/${this.userServ.userId}.jpg`).putString(event,'data_url').then(url =>{
-      url.ref.getDownloadURL().then(imgurl=>{
-        this.userContentUpdate.imgLocation=imgurl;
-      })
-    });
+    if(this.updateProfile)
+      this.afStorage.ref(`img/users/${this.userServ.userId}.jpg`).putString(event,'data_url').then(url =>{
+        url.ref.getDownloadURL().then(imgurl=>{
+          this.userContent.imgLocation=this.userContentUpdate.imgLocation=imgurl;
+
+        })
+      });
+    else
+      this.afStorage.ref(`img/lost/${this.$key}.jpg`).putString(event,'data_url').then(url =>{
+        url.ref.getDownloadURL().then(imgurl=>{
+          this.items.itemImgLocation=this.itemContent.itemImgLocation=imgurl;
+        })
+      });
 
   }
 
@@ -175,8 +188,9 @@ export class EditPage {
     this.itemContent.itemN=this.items.itemN;
     this.itemContent.itemDescription=this.items.itemDescription;
     this.itemContent.itemLocation=this.items.itemLocation;
-    if(!this.showPic)
+    if(!this.showPic){
       this.itemContent.itemImgLocation=null;
+    }
     try{
       this.itemServ.updateItem(this.itemContent,this.queryFL,this.$key);
       //callback function
@@ -184,7 +198,13 @@ export class EditPage {
         this.navCtrl.pop();
       });
     }
-    catch(e){}
+    catch(e){
+      let alert = this.alertCtrl.create({
+        title:"Couldn't update",
+        buttons:['ok']
+      })
+      alert.present();
+    }
   }
 
   deletePic(){
