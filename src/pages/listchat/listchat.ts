@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { ChatPage } from '../chat/chat';
-import { Socket } from 'ng-socket-io';
+import { ChatService } from '../../providers/chat-service/chat-service';
+import { UserService } from '../../providers/user-service/user-service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -22,19 +24,28 @@ export class ListchatPage {
         content: "Hello. You're awesome. Thank you for finding my belongings :)"
       }
   ];
+  userId:any;
+  chatList;any;
+  chatUserList:any;
+  check=false;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private socket: Socket) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private chatServ: ChatService, private userServ: UserService, private db: AngularFireDatabase) {
+    this.userId=this.userServ.userId;
   }
-
-  gotoUserC(name:string){
-    this.socket.connect();
-    this.socket.emit('user',name);
-    this.navCtrl.push(ChatPage, {userN: name});
+  ionViewDidLoad(){
+    this.chatList=this.chatServ.getChatList(this.userId);
+    this.check = true;
   }
-
   getlistChat(){
     return this.listUserChat;
+  }
+
+  getUserC(userId){
+    let content;
+    this.userServ.getUsers(userId).on('value',ab=>{
+      content=ab.val();
+    })
+    return content;
   }
 
 }

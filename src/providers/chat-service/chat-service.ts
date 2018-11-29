@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { Events } from 'ionic-angular';
+import { AngularFireDatabase, snapshotChanges } from 'angularfire2/database';
 
 /*
   Generated class for the ChatServiceProvider provider.
@@ -12,7 +13,9 @@ import { Events } from 'ionic-angular';
 export class ChatService {
   chatsRef= firebase.database().ref('chats/');
   messages=[];
-  constructor(public events: Events) {
+  chatList=[];
+
+  constructor(public events: Events, private db: AngularFireDatabase) {
     
   }
 
@@ -47,6 +50,16 @@ export class ChatService {
       }
       this.events.publish('newMessages');
     })
+  }
+
+  getChatList(currentUserId:string){
+
+    this.db.list(`chats/${currentUserId}`).snapshotChanges().subscribe(data=>{
+      data.map(item=>{
+        this.chatList.push(item.key);
+      })
+    })
+    return this.chatList;
   }
 
 }

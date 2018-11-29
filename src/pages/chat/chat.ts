@@ -23,7 +23,6 @@ export class ChatPage {
   check=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private userServ: UserService,private chatServ: ChatService,public events: Events) {
-    this.user = navParams.get('userN');
     this.chatUserId = navParams.get('userId');
     this.currentUserId = this.userServ.userId;
 
@@ -46,7 +45,8 @@ export class ChatPage {
     this.check=true;
   }
   send(){
-    this.addMessage();
+    if(this.message!=='')
+      this.addMessage();
   }
 
   addMessage(){

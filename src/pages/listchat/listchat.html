@@ -9,17 +9,16 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf="check">
 
-    <ion-list *ngFor="let user of getlistChat()">
+    <ion-list *ngFor="let userId of chatList">
       <button ion-item (click)="gotoUserC(user.name)">
 
           <ion-avatar item-start>
-            <img [src]="user.avatar">
+            <img [src]="getUserC(userId)?.imgLocation">
           </ion-avatar>
 
-          <h2>{{ user.name }}</h2>
-          <p>{{ user.content }}</p>
+          <h2>{{ getUserC(userId)?.fname }}</h2>
 
       </button>
     </ion-list>
