@@ -4,6 +4,7 @@ import { UserService } from '../../providers/user-service/user-service';
 import { ItemService } from '../../providers/item-service/Item-service';
 import { FeedPage } from '../feed/feed';
 import { EditPage } from '../edit/edit';
+import { ChatPage } from '../chat/chat';
 
 /**
  * Generated class for the ItemDetailsPage page.
@@ -78,5 +79,9 @@ export class ItemDetailsPage {
       buttons:['OK']
     })
     alert.present();
+  }
+
+  chat(){
+    this.navCtrl.push(ChatPage,{userId:this.items.userId});
   }
 }

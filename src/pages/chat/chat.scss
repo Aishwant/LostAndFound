@@ -11,7 +11,8 @@ page-chat {
     .chat-right{
             background-color: #ccc;
             color: #000;
-        }
+            float: right;
+    }
 
     @media screen and (min-width: 1024px){
         .chat-left{

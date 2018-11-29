@@ -54,11 +54,12 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { DiagnosticProvider } from '../providers/diagnostic/diagnostic';
 import { Diagnostic } from '@ionic-native/diagnostic'
+import { ChatService } from '../providers/chat-service/chat-service';
 
 
 
 let config: SocketIoConfig = {
-  url: "http://130.74.227.234:3000",
+  url: "http://130.74.146.139:3000",
   options: {}
 }
 
@@ -121,7 +122,8 @@ let config: SocketIoConfig = {
     ItemService,
     Camera,
     DiagnosticProvider,
-    Diagnostic
+    Diagnostic,
+    ChatService
   ]
 })
 export class AppModule {}

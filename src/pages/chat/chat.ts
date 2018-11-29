@@ -1,14 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs';
-import { Socket } from 'ng-socket-io';
-
-/**
- * Generated class for the ChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { UserService } from '../../providers/user-service/user-service';
+import { ChatService } from '../../providers/chat-service/chat-service';
 
 @IonicPage()
 @Component({
@@ -17,84 +10,48 @@ import { Socket } from 'ng-socket-io';
 })
 export class ChatPage {
 
-  user:any;
+  @ViewChild('content') content:any;
+
+  chatUserId:any;
+  currentUserId:any;
   fnameFrom:string;
   fnameTo:string;
-  messagesOld=[];
+  oldMessages=[];
   message = '';
+  userCurrent=[];
+  userChat=[];
+  check=false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private socket: Socket) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private userServ: UserService,private chatServ: ChatService,public events: Events) {
     this.user = navParams.get('userN');
-    this.getMessages().subscribe(message => {
-      this.messagesOld.push(message);
-    });
+    this.chatUserId = navParams.get('userId');
+    this.currentUserId = this.userServ.userId;
 
-    this.getUsers().subscribe(data =>{
-      let user1 = data['user'];
+    this.events.subscribe('newMessages',()=>{
+      this.oldMessages = [],
+      this.oldMessages = this.chatServ.messages;
     })
 
-    // this.getUsers().subscribe(data => {
-    //   let user = data['user'];
-    //   if(data['event'] === 'left') {
-
-    //   }else{
-
-    //   }
-    // })
+    this.userServ.getUsers(this.chatUserId).on('value',ab=>{
+      this.userChat=ab.val();
+    });
   }
-
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad ChatPage');
-  // }
-
-  ionViewWillLeave(){
-    this.socket.disconnect();
+  ionViewDidEnter(){
+    setTimeout(() => {
+      this.content.scrollToBottom(0);
+    });
   }
-  checkNewMsg(){
-    return true;
+  ionViewDidLoad(){
+    this.chatServ.getMessages(this.currentUserId,this.chatUserId);
+    this.check=true;
   }
-
-  NewMsgServer(){
-    return 'Hello. Thank you for helping me find my lost item :) Have a good day';
-  }
-
-  NewMsgClient(){
-    return "You're welcome. Hope you want lose it again :P have a good day";
-  }
-
   send(){
-    this.socket.emit('add-message',{text:this.message});
-    this.message = '';
-    // const alert = this.alertCtrl.create({
-    //   subTitle: "Feature coming out soon",
-    //   buttons:['OK']
-    // });
-    // alert.present();
+    this.addMessage();
   }
 
-  // getUsers(){
-  //   let observable = new Observable(ob =>{
-  //     this.socket.on('users-changed',data=>{
-  //       ob.next(data);
-  //     })
-  //   });
-  //   return observable;
-  // }
-  getMessages(){
-    let observable = new Observable(ob => {
-      this.socket.on('message',data=>{
-        ob.next(data);
-      })
-    });
-    return observable;
-  }
-
-  getUsers(){
-    let observable = new Observable(ob => {
-      this.socket.on('users-changed',data=>{
-        ob.next(data);
-      })
-    });
-    return observable;
+  addMessage(){
+      this.chatServ.addNewMsg(this.currentUserId,this.chatUserId,this.message).then(()=>{
+        this.message='';
+      });
   }
 }
