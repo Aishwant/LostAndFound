@@ -16,7 +16,7 @@ export class ChatService {
   chatList=[];
 
   constructor(public events: Events, private db: AngularFireDatabase) {
-    
+
   }
 
   addNewMsg(senderId:string, toUserId:string,message){
@@ -57,9 +57,14 @@ export class ChatService {
     this.db.list(`chats/${currentUserId}`).snapshotChanges().subscribe(data=>{
       data.map(item=>{
         this.chatList.push(item.key);
+        this.events.publish('chatlist');
       })
     })
     return this.chatList;
+  }
+
+  emptyChatList(){
+    this.chatList=[];
   }
 
 }

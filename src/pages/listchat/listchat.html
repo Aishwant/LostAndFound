@@ -12,7 +12,7 @@
 <ion-content padding *ngIf="check">
 
     <ion-list *ngFor="let userId of chatList">
-      <button ion-item (click)="gotoUserC(user.name)">
+      <button ion-item (click)="gotoUserChat(userId)">
 
           <ion-avatar item-start>
             <img [src]="getUserC(userId)?.imgLocation">

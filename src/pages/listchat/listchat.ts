@@ -29,11 +29,21 @@ export class ListchatPage {
   chatUserList:any;
   check=false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private chatServ: ChatService, private userServ: UserService, private db: AngularFireDatabase) {
-    this.userId=this.userServ.userId;
+  constructor(public navCtrl: NavController, public navParams: NavParams,private chatServ: ChatService, private userServ: UserService, private db: AngularFireDatabase, private events: Events) {
+    // this.userId=this.userServ.userId;
+    // this.events.subscribe('chatlist',()=>{
+    //   this.chatList=[];
+    //   this.chatList=this.chatServ.chatList;
+    // })
   }
-  ionViewDidLoad(){
+  ngOnInit(){
+    this.userId=this.userServ.userId;
+    this.chatServ.emptyChatList();
     this.chatList=this.chatServ.getChatList(this.userId);
+    console.log(this.chatList);
+  }
+
+  ionViewDidLoad(){
     this.check = true;
   }
   getlistChat(){
@@ -43,9 +53,13 @@ export class ListchatPage {
   getUserC(userId){
     let content;
     this.userServ.getUsers(userId).on('value',ab=>{
-      content=ab.val();
+        content=ab.val();
     })
     return content;
+  }
+
+  gotoUserChat(userId){
+    this.navCtrl.push(ChatPage,{userId: userId})
   }
 
 }
